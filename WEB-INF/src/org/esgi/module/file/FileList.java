@@ -1,7 +1,12 @@
 package org.esgi.module.file;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.esgi.web.action.AbstractAction;
@@ -11,6 +16,7 @@ public class FileList extends AbstractAction {
 
 	@Override
 	public void execute(IContext context) throws Exception {
+		System.out.println("test");
 		if(Boolean.parseBoolean(context.getProperties().getProperty("autoindex"))){
 			File repo = new File((String) context.getProperties().get("file.repository"));
 	
@@ -18,7 +24,7 @@ public class FileList extends AbstractAction {
 	
 			File currentDir = new File(repo, path);
 			if(currentDir.exists() && currentDir.isDirectory()){
-				context.setDescription("Liste des fichiers du répertoire "+ path);
+				context.setDescription("Liste des fichiers du r��pertoire "+ path);
 				context.addKeyword("fichier");
 				context.addKeyword("dossier");
 				context.getVelocityContext().put("title", repo + path);
@@ -35,11 +41,9 @@ public class FileList extends AbstractAction {
 		}
 	}
 
-
 	public String getRoute() {
 		return "^/file/list(.*/)$";
 	}
-
 
 	public String[] getRewriteGroups() {
 		return new String[]{"path"};

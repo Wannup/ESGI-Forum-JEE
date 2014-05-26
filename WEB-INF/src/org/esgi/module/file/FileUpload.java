@@ -17,6 +17,7 @@ public class FileUpload extends AbstractAction {
 	@Override
 	public void execute(IContext context) throws Exception {
 		boolean isMultipart = ServletFileUpload.isMultipartContent(context.getRequest());
+		System.out.println("bka");
 		if(isMultipart){
 
 			FileItemFactory fif = new DiskFileItemFactory(); 

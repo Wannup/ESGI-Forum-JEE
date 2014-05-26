@@ -11,9 +11,7 @@
 	</context-param>
 
 	<servlet>
-		<servlet-name>
-			Servlet
-		</servlet-name>
+		<servlet-name>Servlet</servlet-name>
 		<servlet-class>
 		org.esgi.web.FrontController
 		</servlet-class>

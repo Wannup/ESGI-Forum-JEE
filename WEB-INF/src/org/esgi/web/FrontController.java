@@ -17,6 +17,7 @@ import org.esgi.module.file.FileList;
 import org.esgi.module.file.FileUpload;
 import org.esgi.module.index.Index;
 import org.esgi.module.user.Connect;
+import org.esgi.module.user.Register;
 import org.esgi.web.action.IAction;
 import org.esgi.web.action.IContext;
 import org.esgi.web.layout.LayoutRenderer;
@@ -27,7 +28,7 @@ import org.esgi.web.route.Router;
  * le lien entre tomcat et votre
  * framework. Il g��n��re le context pour 
  * chaque requete et peu contenir des filtres 
- * d'entree et de sortie pour chaque requette
+ * d'entree et de sortie pour chaque requete
  * exemple validateur de champs ou compression gzip.
  *
  */
@@ -67,6 +68,7 @@ public class FrontController extends HttpServlet{
 		registerAction(new FileDelete());
 		registerAction(new Index());
 		registerAction(new Connect());
+		registerAction(new Register());
 
 		layoutRender = new LayoutRenderer();
 	}

@@ -3,10 +3,10 @@ package org.esgi.module.user;
 import org.esgi.web.action.AbstractAction;
 import org.esgi.web.action.IContext;
 
-public class Connect extends AbstractAction{
+public class Register extends AbstractAction{
 	@Override
 	public String getRoute() {
-		return "/user/connect";
+		return "/user/register";
 	}
 	@Override
 	public String getLayout() {
@@ -14,7 +14,8 @@ public class Connect extends AbstractAction{
 	}
 	@Override
 	public void execute(IContext context) throws Exception {
+		context.getVelocityContext().put("title", "Inscription");
 		System.out.println(context.getRequest().getParameter("login"));
-		
+
 	}
 }

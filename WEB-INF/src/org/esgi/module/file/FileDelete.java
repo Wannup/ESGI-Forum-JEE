@@ -11,9 +11,8 @@ public class FileDelete extends AbstractAction {
 	@Override
 	public void execute(IContext context) throws Exception {
 		File repo = new File((String) context.getProperties().get("file.repository"));
-		
 		File file = new File(repo, (String) context.getParameter("path"));
-		if(file.delete()){
+		if(!(file.delete())){
 			throw new FileNotFoundException("Le fichier n'a pas pu etre supprim��.");
 		}
 		context.getResponse().sendRedirect(context.getRequest().getContextPath()+ "/file/list/" + context.getParameter("path").toString().substring(0,context.getParameter("path").toString().lastIndexOf("/")) + "/");
