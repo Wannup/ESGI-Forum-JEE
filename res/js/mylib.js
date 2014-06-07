@@ -52,7 +52,11 @@ var global = this,
             method : 'POST',
             data : data,
             success : function(response) {
-              alert('NICE');
+				if(data['login'] == "test"){
+					window.location.reload();	
+				} else {
+					alert("error");
+				}
             }
 
           })
@@ -77,19 +81,18 @@ var global = this,
 
     Esgi.html.inputs = {};
     Esgi.html.inputs.Text = function(cfg){
-       var me = this;
-       me.cfg = cfg;
-       me.el = $("<input/>");
-       this.init();
-
-    }
+		var me = this;
+		me.cfg = cfg;	
+		me.el = $("<input placeholder='"+me.cfg.label+"'/>");
+		this.init();
+	}
 
     Esgi.html.inputs.Text.prototype = commons;
 
     Esgi.html.inputs.Password = function(cfg){
        var me = this;
       me.cfg = cfg;
-       me.el = $("<input type='password'/>");
+       me.el = $("<input type='password' placeholder='"+me.cfg.label+"'/>");
        this.init();
 
     }

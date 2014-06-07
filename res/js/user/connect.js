@@ -11,10 +11,12 @@ Esgi.module.user.Connect = function (cfg) {
                 {
                   type : "Text",
                   name : 'login',
+                  label : "Identifiant",
                   emptyText : 'Saisir votre login' 
                 },{
                   type : "Password",
                   name : 'password',
+                  label : "Mot de passe"
                 }
              ]
         });

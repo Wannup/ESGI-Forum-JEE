@@ -10,21 +10,23 @@ Esgi.module.user.Register = function (cfg) {
                 {
                   type : "Text",
                   name : 'fname',
-                  emptyText : 'Saisir votre nom' 
+                  label : "Nom",
                 },{
                   type : "Text",
                   name : 'lname',
-                  emptyText : 'Saisir votre prénom' 
+                  label : "Prenom", 
                 },{
                   type : "Text",
                   name : 'login',
-                  emptyText : 'Saisir votre login' 
+                  label : "Identifiant",
                 },{
                   type : "Password",
                   name : 'password',
+                  label : "Mot de passe",
                 },{
                   type : "Password",
                   name : 'passwordVerification',
+                  label : "Mot de passe verification",
                 }
              ]
         });
