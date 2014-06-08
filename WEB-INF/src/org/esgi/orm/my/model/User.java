@@ -11,7 +11,7 @@ public class User {
 	public int id;
 	public String login;
 	public String password;
-	public volatile Date connectedAt;
+	public volatile String connectedAt;
 	
 	@Override
 	public String toString() {

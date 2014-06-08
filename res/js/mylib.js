@@ -52,11 +52,7 @@ var global = this,
             method : 'POST',
             data : data,
             success : function(response) {
-				if(data['login'] == "test"){
-					window.location.reload();	
-				} else {
-					alert("error");
-				}
+				//window.location.reload();	
             }
 
           })

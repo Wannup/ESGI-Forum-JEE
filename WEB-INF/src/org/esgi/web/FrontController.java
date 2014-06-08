@@ -78,7 +78,6 @@ public class FrontController extends HttpServlet{
 	public void service(HttpServletRequest 
 			request, HttpServletResponse response)
 					throws ServletException, IOException {
-
 		String url = request.getPathInfo();
 		IContext context = createContext(request, response);
 		IAction action = router.find(url, context);

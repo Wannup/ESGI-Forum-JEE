@@ -13,5 +13,6 @@
 	<classpathentry kind="lib" path="C:/Users/Erwan/Documents/GitHub/JavaWeb/WEB-INF/lib/jackson-all-1.9.11.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Erwan/Documents/GitHub/JavaWeb/WEB-INF/lib/velocity-1.7.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Erwan/Documents/GitHub/JavaWeb/WEB-INF/lib/velocity-1.7-dep.jar"/>
+	<classpathentry kind="var" path="JDBC"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>
