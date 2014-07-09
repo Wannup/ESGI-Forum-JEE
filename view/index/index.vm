@@ -1,12 +1,4 @@
 $context.setPageTitle("Nom du site")
-#set ($js = $context.getProperties().get("context")+"/res/js/user/connect.js")
-#set ($checkConnexionOk = $context.getProperties().get("check"))
-#if(!$checkConnexionOk)
-	$context.addJSDependency($js)
-	$context.addOnJsReady("new Esgi.module.user.Connect({ id : '#container'})")
-#else
-	
-#end
 
 <div id="container">
 </div>

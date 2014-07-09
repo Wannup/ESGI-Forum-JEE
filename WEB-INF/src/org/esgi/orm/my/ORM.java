@@ -16,8 +16,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.esgi.orm.my.annotations.ORM_PK;
+import org.esgi.orm.my.annotations.ORM_SEARCH;
 import org.esgi.orm.my.annotations.ORM_TABLE;
 import org.esgi.orm.my.annotations.ORM_TYPE_INTEGER;
 import org.esgi.orm.my.annotations.ORM_TYPE_VARCHAR;
@@ -53,6 +55,10 @@ public class ORM implements IORM {
 	
 	public static String createConnectionString(){
 		return "jdbc:mysql://" +mysqlHost + "/" + mysqlDatabase;
+	}
+	
+	public static Object loadWithOutPrimaryKey(Class c, ORM_SEARCH search) {
+		return instance._loadWithoutPrimaryKey(c, search);
 	}
 	
 	public static Connection createConnectionObject(){
@@ -486,6 +492,90 @@ public class ORM implements IORM {
 			System.out.println("Couldn't map value to object field");
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public ArrayList<Object> _loadWithoutPrimaryKey(Class c, ORM_SEARCH search) {
+		ArrayList<Object> listO =  new ArrayList<>();
+		
+		Connection co = instance.createConnectionObject();
+		
+		try {			
+		
+			String nameTab = getTableName(c);
+
+			if(null == nameTab)
+				return null;
+
+			//R�cup�ration des champs de la table
+			ArrayList<Object[]> tabChamps = getAllField(c);
+
+			String listechamps = "";
+			
+			
+			ArrayList<String> tabPK = new ArrayList<String>();
+
+			for(Object[] chps : tabChamps){
+				listechamps += chps[1] + ",";
+				if(chps[2].toString().equals("PRIMARY_KEY"))
+					tabPK.add(chps[1].toString());
+			}
+			listechamps = listechamps.substring(0,listechamps.length()-1);
+			
+			
+			
+			
+			
+			//Préparation de la requête
+			String sql = "SELECT " + listechamps +" FROM "+ nameTab +" WHERE ";
+			int i=0;
+			
+			ArrayList<String> tempValue = new ArrayList<>();
+			
+			for(Entry<String, String> entry : search.getRecherche().entrySet()) {
+			    String cle = entry.getKey();
+			    tempValue.add(entry.getValue());
+			    
+			    if(i>0){
+			    	sql += " AND " + cle + " = ? ";
+			    }else{
+			    	sql += " " + cle + " = ? ";
+			    }
+			    i++;
+			}
+						
+			PreparedStatement stat = (PreparedStatement) co.prepareStatement(sql) ;
+			
+			
+			for(i = 0 ; i<tempValue.size() ; i++){
+				stat.setString(i+1, tempValue.get(i));
+			}
+
+			
+			ResultSet rs = (ResultSet) stat.executeQuery () ;
+
+			
+			Object tempO;
+			Field[] fields = c.getFields();
+			while (rs.next ())
+			{
+				tempO = c.newInstance();
+				for(Field f : fields){
+					if(f.getModifiers() == 1){
+						String nameField = namePackageToNamePropertie(f.getName());
+						f.set(tempO, rs.getObject(nameField));
+					}
+				}
+				listO.add(tempO);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+			e.printStackTrace();
+		}
+
+		return listO;
 	}
 }
 

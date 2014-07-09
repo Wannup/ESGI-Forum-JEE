@@ -15,7 +15,5 @@ public class Register extends AbstractAction{
 	@Override
 	public void execute(IContext context) throws Exception {
 		context.getVelocityContext().put("title", "Inscription");
-		System.out.println(context.getRequest().getParameter("login"));
-
 	}
 }

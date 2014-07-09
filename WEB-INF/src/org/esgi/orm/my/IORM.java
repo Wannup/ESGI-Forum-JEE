@@ -1,5 +1,9 @@
 package org.esgi.orm.my;
 
+import java.util.ArrayList;
+
+import org.esgi.orm.my.annotations.ORM_SEARCH;
+
 public interface IORM {
 
 	/** Create or update a record in db. */
@@ -11,6 +15,6 @@ public interface IORM {
 	/** delete an record from clazz persistence layer */
 	public boolean _remove(Class<?> c, Object id);
 	
-	
+	public  ArrayList<Object> _loadWithoutPrimaryKey(Class clazz, ORM_SEARCH critere);
 	
 }

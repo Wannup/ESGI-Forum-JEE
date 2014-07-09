@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
 import org.esgi.orm.my.ORM;
+import org.esgi.orm.my.annotations.ORM_SEARCH;
 import org.esgi.orm.my.model.User;
 import org.esgi.web.action.AbstractAction;
 import org.esgi.web.action.IContext;
@@ -23,29 +24,22 @@ public class Connect extends AbstractAction{
 		context.getVelocityContext().put("title", "Connexion");
 		String login = context.getRequest().getParameter("login");
 		String password = context.getRequest().getParameter("password");
-		ArrayList<Object[]> allUsers = ORM.getAllField(User.class);
-		boolean userExist = false;
-		int i = 0;
-		//User u;
-		//u = (User) ORM.load(User.class, 1);
-		//System.out.println(u);
-		while(userExist || i==allUsers.size()){
-			User[] u = (User[])allUsers.get(i);
-			System.out.println(u[1].login);
-			if(u[i].login.equals(login)){
-				userExist=true;
-			}
-			i++;
-		}
-		if(userExist){
-			HttpSession session = context.getRequest().getSession(true);
-			System.out.println(login);
-
-			session.setAttribute("login",login);
-			System.out.println(login);
-		}
-		context.getVelocityContext().put("check", userExist);
-			
+		ORM_SEARCH search = new ORM_SEARCH();
+		search.addConstrainte("login", login);
 		
+		ArrayList<User> results = (ArrayList<User>) ORM.loadWithOutPrimaryKey(User.class, search);
+		boolean isPasswordCorrect = false;
+		if(results.size() > 0){
+			User u = results.get(0);
+			isPasswordCorrect = password.equals(u.getPassword());
+			HttpSession session = context.getRequest().getSession();
+	       	session.setAttribute("userConnected", u);       	
+		}
+		if(!isPasswordCorrect){
+			System.out.println("Echec de la connexion.");
+		} else {
+			System.out.println("Utilisateur: " + login + " s'est connecte.");
+		}
+		context.getVelocityContext().put("isPasswordCorrect", isPasswordCorrect);	
 	}
 }
