@@ -14,6 +14,8 @@ public class Deconnect extends AbstractAction{
 	}
 	@Override
 	public void execute(IContext context) throws Exception {
-		
+		context.getVelocityContext().put("title", " ");
+		System.out.println("Deconnexion..");
+		context.getRequest().getSession().invalidate();
 	}
 }

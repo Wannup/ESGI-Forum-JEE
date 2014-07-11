@@ -17,6 +17,7 @@ import org.esgi.module.file.FileList;
 import org.esgi.module.file.FileUpload;
 import org.esgi.module.index.Index;
 import org.esgi.module.user.Connect;
+import org.esgi.module.user.Deconnect;
 import org.esgi.module.user.Register;
 import org.esgi.module.user.UserPage;
 import org.esgi.web.action.IAction;
@@ -71,7 +72,8 @@ public class FrontController extends HttpServlet{
 		registerAction(new Connect());
 		registerAction(new Register());
 		registerAction(new UserPage());
-
+		registerAction(new Deconnect());
+		
 		layoutRender = new LayoutRenderer();
 	}
 	@Override

@@ -28,18 +28,19 @@ public class Connect extends AbstractAction{
 		search.addConstrainte("login", login);
 		
 		ArrayList<User> results = (ArrayList<User>) ORM.loadWithOutPrimaryKey(User.class, search);
-		boolean isPasswordCorrect = false;
+		boolean passwordOk = false;
+		HttpSession session = context.getRequest().getSession(true);;
 		if(results.size() > 0){
 			User u = results.get(0);
-			isPasswordCorrect = password.equals(u.getPassword());
-			HttpSession session = context.getRequest().getSession();
-	       	session.setAttribute("userConnected", u);       	
+			passwordOk = password.equals(u.getPassword());   	
 		}
-		if(!isPasswordCorrect){
+		
+		if(!passwordOk){
 			System.out.println("Echec de la connexion.");
 		} else {
+			session.setAttribute("online", "ok"); 
 			System.out.println("Utilisateur: " + login + " s'est connecte.");
 		}
-		context.getVelocityContext().put("isPasswordCorrect", isPasswordCorrect);	
+		context.getVelocityContext().put("passwordOk", passwordOk);	
 	}
 }

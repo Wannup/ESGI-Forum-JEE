@@ -38,7 +38,7 @@ public class ORM implements IORM {
 		mysqlHost = "localhost";
 		mysqlDatabase = "esgi";
 		mysqlUser = "root";
-		mysqlPassword = "";
+		mysqlPassword = "root";
 	}
 	
 	public static Object save(Object o) {

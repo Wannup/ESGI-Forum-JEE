@@ -7,10 +7,19 @@
 
 <div id="link"></div>
 
-#set ($js = $context.getProperties().get("context")+"/res/js/shared/link.js")
-$context.addJSDependency($js)
-		
-$context.addOnJsReady("new Esgi.module.shared.MenuPrincipal({ id : '#link'})")
+#set ($online = $context.getRequest().getSession().getAttribute("online"))
+#if(!$online)
 
+	#set ($js = $context.getProperties().get("context")+"/res/js/shared/link.js")
+	$context.addJSDependency($js)
+	$context.addOnJsReady("new Esgi.module.shared.link({ id : '#link'})")
+
+#else
+
+	#set ($js = $context.getProperties().get("context")+"/res/js/shared/onlineLink.js")
+	$context.addJSDependency($js)	
+	$context.addOnJsReady("new Esgi.module.shared.onlineLink({ id : '#link'})")
+
+#end
 
 </header>
