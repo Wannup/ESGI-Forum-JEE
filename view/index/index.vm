@@ -1,6 +1,14 @@
 <h2>
-$context.setPageTitle("Esgi Shop")
+$context.setPageTitle("Esgi Forum")
 </h2>
-<div id="container">
-</div>
+<br/>
+<center> Bienvenue sur le forum de l'&eacute;cole Sup&eacute;rieure de G&eacute;nie Informatique <br/>
+Le club du forum ESGI est le principal site d&#146;entraide des &eacute;tudiants informaticiens avec jusqu'&agrave; 170 000 visites 
+par jour. Le club est fr&eacute;quent&eacute; par plus de  deux mille lecteurs (d&eacute;veloppeurs, chefs de projets, DBA, responsables IT...)
+tous les mois dans le monde. Le Club vous apporte gratuitement une multitude 
+d'avantages : r&eacute;seau social, newsletter, magazine, actualit&eacute;s, cours, tutoriels, articles, FAQ's, tests, 
+comparatifs, d&eacute;bats, sondages, outils, sources, composants et exemples de codes, les BLOGs, et enfin la TV. 
+Le Club est anim&eacute; b&eacute;n&eacute;volement par tous les membres du Club et en particulier par l'&eacute;quipe de r&eacute;daction du Club. 
+L'inscription est facile, rapide et gratuite :  <a href=$context.getProperties().get("context")/user/register/><strong>Inscrivez-vous.</strong></a>  
 
+</center>

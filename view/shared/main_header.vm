@@ -2,7 +2,7 @@
 <div class="container">
 <header class="row">
 <div class="col-md-12">
-	<center><h1>Esgi Shop</h1></center>
+	<center><h1>Esgi Forum</h1></center>
 </div>
 <br/><br/>
 <div id="link"></div>
@@ -32,12 +32,12 @@
 <div>
 	<ul><h4>	 
 		 <a href=$context.getProperties().get("context")/index/> | Accueil | </a>
-		 <a href=$context.getProperties().get("context")/info/> Produit | </a>
-		 <a href=$context.getProperties().get("context")/info/> Qui sommes nous | </a>
+		 <a href=$context.getProperties().get("context")/forum/forum> Forum | </a>
+		 <a href=$context.getProperties().get("context")/infos/info> Qui sommes nous | </a>
 		
 		 #if($online)
-		 
-		 	<a href=$context.getProperties().get("context")/userpage/>  Espace client  |</a>
+		 	
+		 	<a href=$context.getProperties().get("context")/user/userpage> Mon compte  |</a>
 		 	<a href=$context.getProperties().get("context")/user/deconnect/>  Se d&eacute;connecter  |</a>
 		 #end
 	</ul></h4>

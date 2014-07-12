@@ -30,6 +30,7 @@ public class Connect extends AbstractAction{
 		ORM_SEARCH search = new ORM_SEARCH();
 		search.addConstrainte("login", login);
 		
+		
 		ArrayList<User> results = (ArrayList<User>) ORM.loadWithOutPrimaryKey(User.class, search);
 		boolean passwordOk = false;
 		HttpSession session = context.getRequest().getSession(true);;
@@ -44,7 +45,9 @@ public class Connect extends AbstractAction{
 			session.setAttribute("online", "ok");
 			session.setAttribute("username", login);
 			System.out.println("Utilisateur: " + login + " s'est connecte.");
+			
 		}
 		context.getVelocityContext().put("passwordOk", passwordOk);	
+		
 	}
 }

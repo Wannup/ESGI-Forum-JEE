@@ -1,3 +1,30 @@
 <div id="container">
-info utilisateur ici
+
+<center><h2>Mon compte</h2></center>
+<br/>
+<table border="1" cellpadding="15">
+   <tr>
+       <td><b>Nom</b></td>
+       <td><b>Prenom</b></td>
+       <td><b>Login</b></td>
+       <td><b>Adresse mail</b></td>
+       <td><b>Date d'inscription</b></td>
+       
+      </tr> <tr>
+       <td>KHALID</td>
+        <td>Said</td>
+       	<td>$context.getRequest().getSession().getAttribute("username")</td>
+         <td>khalidsaid.box@gmail.com</td>
+         <td>Recup la date BDD</td>
+       </tr>
+  
+</table>
+
+
+
+
+
+
+
+
 </div>
