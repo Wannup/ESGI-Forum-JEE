@@ -2,24 +2,52 @@
 <div class="container">
 <header class="row">
 <div class="col-md-12">
-	<h1>$title</h1>
+	<center><h1>Esgi Shop</h1></center>
 </div>
-
+<br/><br/>
 <div id="link"></div>
 
 #set ($online = $context.getRequest().getSession().getAttribute("online"))
-#if(!$online)
 
-	#set ($js = $context.getProperties().get("context")+"/res/js/shared/link.js")
-	$context.addJSDependency($js)
-	$context.addOnJsReady("new Esgi.module.shared.link({ id : '#link'})")
 
-#else
 
-	#set ($js = $context.getProperties().get("context")+"/res/js/shared/onlineLink.js")
-	$context.addJSDependency($js)	
-	$context.addOnJsReady("new Esgi.module.shared.onlineLink({ id : '#link'})")
 
-#end
+
+<center>
+<div id="entete">
+
+			#if(!$online)
+	 		<div align="right">
+	 			 <a href=$context.getProperties().get("context")/user/connect/><strong>Connexion |</strong></a> 			 	
+				 <a href=$context.getProperties().get("context")/user/register/><strong>Inscription</strong></a> 
+		 
+		 	#else
+		 	<div align="right">
+		 		<i>Bienvenue <b>$context.getRequest().getSession().getAttribute("username")</b></i>
+		 
+		 #end  
+
+</div>
+<br/>
+<div>
+	<ul><h4>	 
+		 <a href=$context.getProperties().get("context")/index/> | Accueil | </a>
+		 <a href=$context.getProperties().get("context")/info/> Produit | </a>
+		 <a href=$context.getProperties().get("context")/info/> Qui sommes nous | </a>
+		
+		 #if($online)
+		 
+		 	<a href=$context.getProperties().get("context")/userpage/>  Espace client  |</a>
+		 	<a href=$context.getProperties().get("context")/user/deconnect/>  Se d&eacute;connecter  |</a>
+		 #end
+	</ul></h4>
+</div>
+</center>
+<style>  
+a{text-decoration:none}
+</style>
+</head>
+<BR><BR><BR><BR>
+<center>
 
 </header>

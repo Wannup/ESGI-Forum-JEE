@@ -1,5 +1,6 @@
-$context.setPageTitle("Nom du site")
-
+<h2>
+$context.setPageTitle("Esgi Shop")
+</h2>
 <div id="container">
 </div>
 

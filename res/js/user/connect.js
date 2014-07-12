@@ -14,7 +14,7 @@ Esgi.module.user.Connect = function (cfg) {
                   type : "Text",
                   name : 'login',
                   label : "Identifiant",
-                  emptyText : 'Saisir votre login' 
+                  emptyText : 'Login' 
                 },{
                   id : 'password',
                   type : "Password",

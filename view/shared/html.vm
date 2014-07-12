@@ -27,12 +27,16 @@
 		$inlineCss
 		</style>
 	#end
+	
   </head>
   <body>
+  <center>
+  
 $context.getFragment("shared/main_header")
+<br/>
 $context.getFragment("__CURRENT__")
 $context.getFragment("shared/main_footer")
-   
+   </center><br/><br/>
    <script>
      var APP_CONTEXT = '$context.getProperties().get("context")';
    </script> 

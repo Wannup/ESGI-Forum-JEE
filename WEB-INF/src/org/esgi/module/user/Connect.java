@@ -19,6 +19,9 @@ public class Connect extends AbstractAction{
 	public String getLayout() {
 		return "default";
 	}
+	
+	
+	
 	@Override
 	public void execute(IContext context) throws Exception {
 		context.getVelocityContext().put("title", "Connexion");
@@ -38,7 +41,8 @@ public class Connect extends AbstractAction{
 		if(!passwordOk){
 			System.out.println("Echec de la connexion.");
 		} else {
-			session.setAttribute("online", "ok"); 
+			session.setAttribute("online", "ok");
+			session.setAttribute("username", login);
 			System.out.println("Utilisateur: " + login + " s'est connecte.");
 		}
 		context.getVelocityContext().put("passwordOk", passwordOk);	
