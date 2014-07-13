@@ -1,5 +1,6 @@
 package org.esgi.module.user;
 
+import java.util.Date;
 import java.util.ArrayList;
 
 import org.esgi.orm.my.ORM;
@@ -33,9 +34,10 @@ public class Register extends AbstractAction{
 				critere.addConstrainte("login", login);
 				ArrayList<User> results = (ArrayList<User>) ORM.loadWithOutPrimaryKey(User.class, critere);			
 				if(results.size() > 0){
-					System.out.println("Login déjà existant.");
+					System.out.println("Login dÃ©jÃ  existant.");
 				}else{
-					User u = new User(login, password, email, lname, fname);
+					Date date = new Date();
+					User u = new User(login, password, email, lname, fname, date.toString());
 					User user = (User) ORM.save(u);
 					if(!(user.getId()>0)){
 						System.out.println("insert fail. " + user.getId());

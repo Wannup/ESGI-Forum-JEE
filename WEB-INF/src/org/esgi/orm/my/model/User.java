@@ -1,5 +1,7 @@
 package org.esgi.orm.my.model;
 
+import java.util.Date;
+
 import org.esgi.orm.my.annotations.ORM_PK;
 import org.esgi.orm.my.annotations.ORM_TABLE;
 
@@ -12,13 +14,15 @@ public class User {
 	public String email;
 	public String lastname;
 	public String firstname;
+	public String registerDate;
 	
-	public User(String login, String password, String email, String lname, String fname){
+	public User(String login, String password, String email, String lname, String fname, String registerDate){
 		this.login = login;
 		this.password = password;
 		this.email = email;
 		this.lastname = lname;
 		this.firstname = fname;
+		this.registerDate = registerDate;
 	}
 	
 	public User(){
@@ -30,6 +34,10 @@ public class User {
 	
 	public String getLogin(){
 		return this.login;
+	}
+	
+	public String getRegisterDate(){
+		return this.registerDate;
 	}
 	
 	public String getPassword(){

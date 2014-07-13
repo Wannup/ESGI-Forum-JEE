@@ -11,11 +11,11 @@
        <td><b>Date d'inscription</b></td>
        
       </tr> <tr>
-       <td>KHALID</td>
-        <td>Said</td>
+       <td>$nom</td>
+        <td>$prenom</td>
        	<td>$context.getRequest().getSession().getAttribute("username")</td>
-         <td>khalidsaid.box@gmail.com</td>
-         <td>Recup la date BDD</td>
+         <td>$email</td>
+         <td>$registerdate</td>
        </tr>
   
 </table>
