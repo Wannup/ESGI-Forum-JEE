@@ -1,6 +1,6 @@
 
 <center>
-<div id="container">
+<p>
 L'école Supérieure de Génie Informatique (ESGI) est une école privée d'enseignement supérieur en informatique 
 située à Paris. www.esgi.fr
 Mission
@@ -9,5 +9,6 @@ Description
 L'école Supérieure de Génie Informatique (ESGI) est une école privée d'enseignement supérieur en informatique 
 située à Paris. Son objectif est de permettre aux étudiants d'acquérir des connaissances dans les métiers 
 de l'informatique et ceux liés à Internet.
-</div>
+</p>
+
 </center>

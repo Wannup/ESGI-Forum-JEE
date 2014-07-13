@@ -1,5 +1,10 @@
-<FORM method=post action="cgi-bin/script.pl">
+#set ($js = $context.getProperties().get("context")+"/res/js/forum/creationmessage.js")
+$context.addJSDependency($js)
+$context.addOnJsReady("new Esgi.module.model.Message({ id : '#container'})")
+
+
 Poster un message sur le forum
+<br>
 <TABLE BORDER=0>
 <TR>
 	<TD>Titre du message</TD>

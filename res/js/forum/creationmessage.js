@@ -15,7 +15,26 @@ Esgi.module.forum.CreationMessage = function (cfg) {
                   name : 'message',
                   label : "Message",
                   emptyText : 'Message' 
-                }
+                },   {
+                    id : 'commentaire',
+                    type : "Text",
+                    name : 'commentaire',
+                    label : "commentaire",
+                    emptyText : 'commentaire' 
+                  },
+                  {
+                      id : 'sujet',
+                      type : "Text",
+                      name : 'sujet',
+                      label : "Titre du sujet",
+                      emptyText : 'Sujet' 
+                    },  {
+                        id : 'titre',
+                        type : "Text",
+                        name : 'titre',
+                        label : "titre",
+                        emptyText : 'titre' 
+                      }
              ]
         });
 }
