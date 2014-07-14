@@ -15,6 +15,7 @@ import org.esgi.module.file.FileDelete;
 import org.esgi.module.file.FileDownload;
 import org.esgi.module.file.FileList;
 import org.esgi.module.file.FileUpload;
+import org.esgi.module.forum.CreationMessage;
 import org.esgi.module.forum.Forum;
 import org.esgi.module.index.Index;
 import org.esgi.module.infos.Info;
@@ -76,7 +77,7 @@ public class FrontController extends HttpServlet{
 		registerAction(new UserPage());
 		registerAction(new Deconnect());
 		registerAction(new Info());
-		registerAction(new Forum());
+		registerAction(new CreationMessage());
 		
 		layoutRender = new LayoutRenderer();
 	}

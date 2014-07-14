@@ -1,0 +1,7 @@
+<div id="container">
+</div>
+
+#set ($js = $context.getProperties().get("context")+"/res/js/forum/creationmessage.js")
+$context.addJSDependency($js)
+$context.addOnJsReady("new Esgi.module.forum.CreationMessage({ id : '#container'})")
+

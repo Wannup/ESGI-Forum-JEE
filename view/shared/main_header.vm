@@ -32,7 +32,7 @@
 <div>
 	<ul><h4>	 
 		 <a href=$context.getProperties().get("context")/index/> | Accueil | </a>
-		 <a href=$context.getProperties().get("context")/forum/forum> Forum | </a>
+		 <a href=$context.getProperties().get("context")/forum/creationmessage> Nouveau sujet | </a>
 		 <a href=$context.getProperties().get("context")/infos/info> Qui sommes nous | </a>
 		
 		 #if($online)
