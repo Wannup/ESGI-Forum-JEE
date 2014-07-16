@@ -3,10 +3,6 @@ var global = this, loadMyLib = function(onloaded) {
   global.Esgi = {};
   global.Esgi.html = {};
 
-  // /
-  // / FORM
-  // /
-
   /**
    * *
    * 
@@ -73,9 +69,6 @@ var global = this, loadMyLib = function(onloaded) {
 
   }
 
-  //
-  // INPUTS
-  //
   var commons = {
     init : function() {
       var me = this;
@@ -158,10 +151,6 @@ var global = this, loadMyLib = function(onloaded) {
   Esgi.html.inputs.File.prototype = commons;
   
 
-
-  //
-  // LINKS
-  //
   Esgi.html.link = function(cfg) {
     var me = this;
     me.cfg = cfg;

@@ -1,0 +1,6 @@
+<div id="container">
+</div>
+
+#set ($js = $context.getProperties().get("context")+"/res/js/forum/creationtopic.js")
+$context.addJSDependency($js)
+$context.addOnJsReady("new Esgi.module.forum.CreationTopic({ id : '#container'})")

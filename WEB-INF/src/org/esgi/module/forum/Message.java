@@ -1,4 +1,4 @@
-package org.esgi.orm.my.model;
+package org.esgi.module.forum;
 
 import java.util.Date;
 

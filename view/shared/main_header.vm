@@ -18,7 +18,7 @@
 
 			#if(!$online)
 	 		<div align="right">
-	 			 <a href=$context.getProperties().get("context")/user/connect/><strong>Connexion |</strong></a> 			 	
+	 			 <a href=$context.getProperties().get("context")/user/connect/><strong>Connexion </strong></a>|			 	
 				 <a href=$context.getProperties().get("context")/user/register/><strong>Inscription</strong></a> 
 		 
 		 	#else
@@ -31,14 +31,13 @@
 <br/>
 <div>
 	<ul><h4>	 
-		 <a href=$context.getProperties().get("context")/index/> | Accueil | </a>
-		 <a href=$context.getProperties().get("context")/forum/creationmessage> Nouveau sujet | </a>
-		 <a href=$context.getProperties().get("context")/infos/info> Qui sommes nous | </a>
+		 |<a href=$context.getProperties().get("context")/index/>  Accueil  </a>|
+		 <a href=$context.getProperties().get("context")/infos/info> Qui sommes nous  </a>|
 		
 		 #if($online)
-		 	
-		 	<a href=$context.getProperties().get("context")/user/userpage> Mon compte  |</a>
-		 	<a href=$context.getProperties().get("context")/user/deconnect/>  Se d&eacute;connecter  |</a>
+		 	<a href=$context.getProperties().get("context")/forum/creationtopic> Nouveau sujet  </a>|
+		 	<a href=$context.getProperties().get("context")/user/userpage> Mon compte  </a>|
+		 	<a href=$context.getProperties().get("context")/user/deconnect/>  Se d&eacute;connecter  </a>|
 		 #end
 	</ul></h4>
 </div>

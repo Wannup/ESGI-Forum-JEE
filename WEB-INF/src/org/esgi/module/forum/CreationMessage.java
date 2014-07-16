@@ -1,7 +1,6 @@
 package org.esgi.module.forum;
 
 import org.esgi.orm.my.ORM;
-import org.esgi.orm.my.model.Message;
 import org.esgi.web.action.AbstractAction;
 import org.esgi.web.action.IContext;
 
