@@ -31,14 +31,13 @@ public class CreationTopic extends AbstractAction{
 		if(message!=null && sujet!=null){	
 			
 			//recup id auteur
-			String login = context.getRequest().getParameter("login");
+			String login = (String) context.getRequest().getSession().getAttribute("username");
 			ORM_SEARCH search = new ORM_SEARCH();
 			search.addConstrainte("login", login);
 			ArrayList<User> results = (ArrayList<User>) ORM.loadWithOutPrimaryKey(User.class, search);
 			User u = results.get(0);
 			
-			Sujet s = new Sujet(sujet, message, u.getId());
-			
+			Sujet s = new Sujet(sujet, message, u.getId());			
 			Sujet stmp = (Sujet) ORM.save(s);
 					
 		}
