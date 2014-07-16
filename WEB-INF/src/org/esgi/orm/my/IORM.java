@@ -16,5 +16,7 @@ public interface IORM {
 	public boolean _remove(Class<?> c, Object id);
 	
 	public  ArrayList<Object> _loadWithoutPrimaryKey(Class clazz, ORM_SEARCH critere);
+
+	ArrayList<Object> _loadAllTable(Class c);
 	
 }

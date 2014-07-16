@@ -61,6 +61,10 @@ public class ORM implements IORM {
 		return instance._loadWithoutPrimaryKey(c, search);
 	}
 	
+	public static Object loadAllTable(Class c) {
+		return instance._loadAllTable(c);
+	}
+	
 	public static Connection createConnectionObject(){
 		Connection connection;
 		try { 
@@ -248,7 +252,6 @@ public class ORM implements IORM {
 				}
 				
 				else{
-					//Switch to a default type
 					query.append("TEXT ");
 				}
 				
@@ -265,15 +268,14 @@ public class ORM implements IORM {
 				st.execute(query.toString());
 			}
 			catch (SQLException e){
-				//e.printStackTrace();
-				System.out.println("Exception when creating table");
+				e.printStackTrace();
 			}
 			st.close();
 			
 			/** Try to update the object **/
 			
-			//The object needs an integer ID field for the upsert to suceed
-			int id = -1; // -1 means the id is not set in the object
+			//The object needs an integer ID field 
+			int id = -1; 
 			for(Field f : fields){
 				if(f.getName().toLowerCase().equals("id")){
 					try {
@@ -290,7 +292,6 @@ public class ORM implements IORM {
 								+ ". Check if it is public and accessible.");
 						break;
 					} catch (NullPointerException e){
-						//The id is not set, so we will directly make an insert
 						id = -1;
 					}
 				}
@@ -299,7 +300,7 @@ public class ORM implements IORM {
 			query = new StringBuilder();
 			
 			if(id == -1){
-				//Let's make an insert, and ommit the id field, if any
+
 				System.out.println("ID not set. The save will be an INSERT");
 				query.append("INSERT INTO `"+tableName+"` (");
 				
@@ -333,7 +334,6 @@ public class ORM implements IORM {
 				
 			}else{
 				
-				//Let's make an upsert
 				System.out.println("ID found: "+id+" The save will be an UPSERT");
 				query.append("SELECT count(id) FROM "+tableName+" WHERE id=?");
 				PreparedStatement selectSt = connection.prepareStatement(query.toString());
@@ -344,7 +344,7 @@ public class ORM implements IORM {
 				
 				int count = rs.getInt(1);
 				if(count == 0){
-					//The object doesn't exists -> INSERT
+					//INSERT
 					query = new StringBuilder();
 					query.append("INSERT INTO `"+tableName+"` (");
 					for(Map.Entry<String,Object> field : persistentFields.entrySet()){
@@ -370,7 +370,7 @@ public class ORM implements IORM {
 					insertSt.execute();
 					
 				}else{
-					//The object already exists -> UPDATE
+					//UPDATE
 					query = new StringBuilder();
 					query.append("UPDATE " + tableName + " SET ");
 					
@@ -434,8 +434,7 @@ public class ORM implements IORM {
 			} 
 			
 			catch (NullPointerException e){
-				//The value of the field is null. This check is made before
-				//the "put" 
+				e.printStackTrace();
 			}
 			
 			finally{
@@ -493,11 +492,42 @@ public class ORM implements IORM {
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public ArrayList<Object> _loadAllTable(Class c) {
+		Connection co = instance.createConnectionObject();
+		ArrayList<Object> list =  new ArrayList<>();
+		String nameTab = getTableName(c);
+		String sql = "SELECT * FROM "+ nameTab +";";
+		
+		try {
+			PreparedStatement stat = (PreparedStatement) co.prepareStatement(sql) ;
+			ResultSet rs = (ResultSet) stat.executeQuery () ;
+
+			
+			Object tempO;
+			Field[] fields = c.getFields();
+			while (rs.next ())
+			{
+				tempO = c.newInstance();
+				for(Field f : fields){
+					if(f.getModifiers() == 1){
+						String nameField = namePackageToNamePropertie(f.getName());
+						f.set(tempO, rs.getObject(nameField));
+					}
+				}
+				list.add(tempO);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 
 	@Override
 	public ArrayList<Object> _loadWithoutPrimaryKey(Class c, ORM_SEARCH search) {
-		ArrayList<Object> listO =  new ArrayList<>();
-		
+		ArrayList<Object> list =  new ArrayList<>();
 		Connection co = instance.createConnectionObject();
 		
 		try {			
@@ -507,7 +537,7 @@ public class ORM implements IORM {
 			if(null == nameTab)
 				return null;
 
-			//R�cup�ration des champs de la table
+
 			ArrayList<Object[]> tabChamps = getAllField(c);
 
 			String listechamps = "";
@@ -521,12 +551,7 @@ public class ORM implements IORM {
 					tabPK.add(chps[1].toString());
 			}
 			listechamps = listechamps.substring(0,listechamps.length()-1);
-			
-			
-			
-			
-			
-			//Préparation de la requête
+				
 			String sql = "SELECT " + listechamps +" FROM "+ nameTab +" WHERE ";
 			int i=0;
 			
@@ -566,7 +591,7 @@ public class ORM implements IORM {
 						f.set(tempO, rs.getObject(nameField));
 					}
 				}
-				listO.add(tempO);
+				list.add(tempO);
 			}
 
 		} catch (Exception e) {
@@ -575,7 +600,7 @@ public class ORM implements IORM {
 			e.printStackTrace();
 		}
 
-		return listO;
+		return list;
 	}
 }
 

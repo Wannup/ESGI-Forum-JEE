@@ -7,7 +7,7 @@ Esgi.module.forum.CreationTopic = function (cfg) {
         new Esgi.html.Form({
              url : APP_CONTEXT+'/forum/creationtopic',
              renderTo : cfg.id,
-             redirect : APP_CONTEXT + '/forum/topicmessagelist/',
+             redirect : APP_CONTEXT + '/forum/index/',
              inputs : [
                 {
                   id : 'sujet',

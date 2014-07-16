@@ -17,7 +17,6 @@ import org.esgi.module.file.FileList;
 import org.esgi.module.file.FileUpload;
 import org.esgi.module.forum.CreationMessage;
 import org.esgi.module.forum.CreationTopic;
-import org.esgi.module.forum.Forum;
 import org.esgi.module.index.Index;
 import org.esgi.module.infos.Info;
 import org.esgi.module.user.Connect;

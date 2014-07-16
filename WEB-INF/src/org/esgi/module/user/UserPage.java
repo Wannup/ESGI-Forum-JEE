@@ -1,6 +1,9 @@
 package org.esgi.module.user;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.esgi.orm.my.ORM;
 import org.esgi.orm.my.annotations.ORM_SEARCH;
@@ -34,6 +37,10 @@ public class UserPage extends AbstractAction{
 		context.getVelocityContext().put("nom", nom);	
 		context.getVelocityContext().put("prenom", prenom);
 		context.getVelocityContext().put("email", email);
-		context.getVelocityContext().put("registerdate", rdate);
+		
+		String[] splitArray = null;
+		splitArray = rdate.split(" ");
+		
+		context.getVelocityContext().put("registerdate", splitArray[2] + " " + splitArray[1] + " " + splitArray[5]);
 	}
 }

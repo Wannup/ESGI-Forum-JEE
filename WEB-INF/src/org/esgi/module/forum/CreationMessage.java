@@ -1,7 +1,12 @@
 package org.esgi.module.forum;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import org.esgi.orm.my.ORM;
+import org.esgi.orm.my.annotations.ORM_SEARCH;
 import org.esgi.orm.my.model.Message;
+import org.esgi.orm.my.model.User;
 import org.esgi.web.action.AbstractAction;
 import org.esgi.web.action.IContext;
 
@@ -24,14 +29,20 @@ public class CreationMessage extends AbstractAction{
 			context.getRequest().getSession(true);
 			context.getVelocityContext().put("title", "CreationMessage");
 			String message = context.getRequest().getParameter("message");
-			String commentaire = context.getRequest().getParameter("commentaire");
-			String titre = context.getRequest().getParameter("titre");
-			String sujet = context.getRequest().getParameter("sujet");
 		
 			
-			if(message!=null && commentaire!=null && titre!=null && sujet!=null){		
-					//Message u = new Message(message, date, userId, sujet);
-					//Message unmessage = (Message) ORM.save(u);
+			if(message!=null){		
+				String login = (String) context.getRequest().getSession().getAttribute("username");
+				ORM_SEARCH search = new ORM_SEARCH();
+				search.addConstrainte("login", login);
+				ArrayList<User> results = (ArrayList<User>) ORM.loadWithOutPrimaryKey(User.class, search);
+				User u = results.get(0);
+				
+				Date date = new Date();
+				
+				long sujetId = 0;
+				Message m = new Message(message, date.toString(), u.getId(), sujetId);
+				Message mTmp = (Message) ORM.save(m);			
 						
 			}
 		}
