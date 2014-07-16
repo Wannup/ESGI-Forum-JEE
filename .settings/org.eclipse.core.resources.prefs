@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//WEB-INF/src/org/esgi/module/file/FileDelete.java=UTF-8
 encoding//WEB-INF/src/org/esgi/module/file/FileList.java=UTF-8
+encoding//WEB-INF/src/org/esgi/module/forum/CreationTopic.java=UTF-8
 encoding//WEB-INF/src/org/esgi/module/user/Connect.java=UTF-8
 encoding//WEB-INF/src/org/esgi/module/user/Register.java=UTF-8
 encoding//WEB-INF/src/org/esgi/orm/my/ORM.java=UTF-8

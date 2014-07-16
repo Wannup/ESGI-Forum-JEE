@@ -1,9 +1,12 @@
 package org.esgi.module.forum;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.esgi.orm.my.ORM;
 import org.esgi.orm.my.annotations.ORM_SEARCH;
+import org.esgi.orm.my.model.Message;
+import org.esgi.orm.my.model.Sujet;
 import org.esgi.orm.my.model.User;
 import org.esgi.web.action.AbstractAction;
 import org.esgi.web.action.IContext;
@@ -30,15 +33,30 @@ public class CreationTopic extends AbstractAction{
 		
 		if(message!=null && sujet!=null){	
 			
-			//recup id auteur
-			String login = (String) context.getRequest().getSession().getAttribute("username");
-			ORM_SEARCH search = new ORM_SEARCH();
-			search.addConstrainte("login", login);
-			ArrayList<User> results = (ArrayList<User>) ORM.loadWithOutPrimaryKey(User.class, search);
-			User u = results.get(0);
+			ORM_SEARCH searchSubject = new ORM_SEARCH();
+			searchSubject.addConstrainte("titre", sujet);
+			ArrayList<Sujet> resultSujet = (ArrayList<Sujet>) ORM.loadWithOutPrimaryKey(Sujet.class, searchSubject);
 			
-			Sujet s = new Sujet(sujet, message, u.getId());			
-			Sujet stmp = (Sujet) ORM.save(s);
+			if(resultSujet.size()>0){
+				System.out.println("sujet déjà existant.");
+			} else {
+				//recup id auteur
+				String login = (String) context.getRequest().getSession().getAttribute("username");
+				ORM_SEARCH search = new ORM_SEARCH();
+				search.addConstrainte("login", login);
+				ArrayList<User> results = (ArrayList<User>) ORM.loadWithOutPrimaryKey(User.class, search);
+				User u = results.get(0);
+				
+				Date date = new Date();
+				Sujet s = new Sujet(sujet, u.getId(), date.toString());			
+				ORM.save(s);		
+	
+				resultSujet = (ArrayList<Sujet>) ORM.loadWithOutPrimaryKey(Sujet.class, searchSubject);
+				s = resultSujet.get(0);
+				Message m = new Message(message, date.toString(), u.getId(), s.getId());
+				ORM.save(m);
+				
+			} 
 					
 		}
 	}
