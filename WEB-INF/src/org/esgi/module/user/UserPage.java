@@ -27,7 +27,7 @@ public class UserPage extends AbstractAction{
 		ORM_SEARCH search = new ORM_SEARCH();
 		search.addConstrainte("login", login);
 		ArrayList<User> results = (ArrayList<User>) ORM.loadWithOutPrimaryKey(User.class, search);
-		System.out.println(login);
+
 		User u = results.get(0);
 		String nom = u.getLastname();
 		String prenom = u.getFirstname();
@@ -37,10 +37,7 @@ public class UserPage extends AbstractAction{
 		context.getVelocityContext().put("nom", nom);	
 		context.getVelocityContext().put("prenom", prenom);
 		context.getVelocityContext().put("email", email);
+		context.getVelocityContext().put("registerdate", rdate);
 		
-		String[] splitArray = null;
-		splitArray = rdate.split(" ");
-		
-		context.getVelocityContext().put("registerdate", splitArray[2] + " " + splitArray[1] + " " + splitArray[5]);
 	}
 }

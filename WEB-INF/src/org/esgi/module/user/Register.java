@@ -1,7 +1,10 @@
 package org.esgi.module.user;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
 
 import org.esgi.orm.my.ORM;
 import org.esgi.orm.my.annotations.ORM_SEARCH;
@@ -37,11 +40,14 @@ public class Register extends AbstractAction{
 					System.out.println("Login déjà existant.");
 				}else{
 					Date date = new Date();
-					User u = new User(login, password, email, lname, fname, date.toString());
-					User user = (User) ORM.save(u);
-					if(!(user.getId()>0)){
-						System.out.println("insert fail. " + user.getId());
-					}
+					SimpleDateFormat dateformatJava = new SimpleDateFormat("dd-MM-yyyy");
+					String date_to_string = dateformatJava.format(date);
+					User u = new User(login, password, email, lname, fname, date_to_string);
+					ORM.save(u);
+					HttpSession session = context.getRequest().getSession(true);
+					session.setAttribute("online", "ok");
+					session.setAttribute("username", login);
+					System.out.println("Utilisateur: " + login + " s'est connecte.");
 				}
 			} else {
 				System.out.println("password don't match.");

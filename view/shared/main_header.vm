@@ -2,7 +2,8 @@
 <div class="container">
 <header class="row">
 <div class="col-md-12">
-	<center><h1>Esgi Forum</h1></center>
+<br/><br/>
+	<center><img src="/JavaWeb/res/img/logo.png"></center>
 </div>
 <br/><br/>
 <div id="link"></div>

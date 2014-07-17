@@ -28,6 +28,5 @@ public class Index extends AbstractAction{
 		ArrayList<Sujet> subjectList = (ArrayList<Sujet>) ORM.loadAllTable(Sujet.class);
 		//System.out.println(subjectList.size());
 		context.getVelocityContext().put("items", subjectList);
-		
 	}
 }

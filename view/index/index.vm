@@ -18,7 +18,7 @@
 
 <center>_______________________________________________</center>
 	#foreach( $item in $items )
-		<a href="$item.getsujet()/">$item.getsujet()</a> <br/>
+		<a href="$item.getsujet()/">$item.getsujet()</a>  // $item.getdate()<br/>
 		<center>_______________________________________________</center>
 	#end
 

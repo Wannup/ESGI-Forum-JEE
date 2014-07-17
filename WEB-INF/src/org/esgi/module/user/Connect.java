@@ -32,22 +32,25 @@ public class Connect extends AbstractAction{
 		
 		
 		ArrayList<User> results = (ArrayList<User>) ORM.loadWithOutPrimaryKey(User.class, search);
-		boolean passwordOk = false;
-		HttpSession session = context.getRequest().getSession(true);;
-		if(results.size() > 0){
-			User u = results.get(0);
-			passwordOk = password.equals(u.getPassword());   	
-		}
-		
-		if(!passwordOk){
-			System.out.println("Echec de la connexion.");
-		} else {
-			session.setAttribute("online", "ok");
-			session.setAttribute("username", login);
-			System.out.println("Utilisateur: " + login + " s'est connecte.");
+		String error = " ";
+		if(login != null && password != null){
+			boolean connectOk = false;
+			HttpSession session = context.getRequest().getSession(true);
+			if(results.size() > 0){
+				User u = results.get(0);
+				connectOk = password.equals(u.getPassword());   	
+			}
 			
+			if(!connectOk){
+				error = "Mot de passe incorrect !";	
+			} else {
+				session.setAttribute("online", "ok");
+				session.setAttribute("username", login);
+				System.out.println("Utilisateur: " + login + " s'est connecte.");
+				
+			}
 		}
-		context.getVelocityContext().put("passwordOk", passwordOk);	
+		context.getVelocityContext().put("connectNotOk", error);
 		
 	}
 }

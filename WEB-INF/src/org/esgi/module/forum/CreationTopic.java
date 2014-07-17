@@ -1,5 +1,6 @@
 package org.esgi.module.forum;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -48,7 +49,10 @@ public class CreationTopic extends AbstractAction{
 				User u = results.get(0);
 				
 				Date date = new Date();
-				Sujet s = new Sujet(sujet, u.getId(), date.toString());			
+				SimpleDateFormat dateformatJava = new SimpleDateFormat("dd-MM-yyyy");
+				String date_to_string = dateformatJava.format(date);
+
+				Sujet s = new Sujet(sujet, u.getId(), date_to_string);			
 				ORM.save(s);		
 	
 				resultSujet = (ArrayList<Sujet>) ORM.loadWithOutPrimaryKey(Sujet.class, searchSubject);
