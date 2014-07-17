@@ -1,0 +1,11 @@
+#set ($online = $context.getRequest().getSession().getAttribute("online"))
+
+<div id="container">
+</div>
+
+	#foreach( $item in $items )
+		<a href=$context.getProperties().get("context")/forum/topicmessagelist?id=$item.getId()>$item.getsujet()</a>  // $item.getdate()<br/>
+		<center>____________________________________________________________________</center>
+
+#end
+<center>$item.getMessage($item.getId())</center>

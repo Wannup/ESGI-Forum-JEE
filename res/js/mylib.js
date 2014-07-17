@@ -50,7 +50,7 @@ var global = this, loadMyLib = function(onloaded) {
         method : 'POST',
         data : data,
         success : function(response) {
-          if(response.trim() != "success"){
+          if(response.trim() != "OK"){
             if (me.cfg.msgSuccess)
               window.location.reload();
             else if(me.cfg.resultTo)
@@ -117,6 +117,30 @@ var global = this, loadMyLib = function(onloaded) {
   }
   Esgi.html.inputs.Password.prototype = commons;
   
+  Esgi.html.inputs.Radio = function(cfg) {
+    var me = this;
+    me.cfg = cfg;
+    me.el = $("<input class\"" + me.cfg.classInput + "\" name=\"" + cfg.name + "\" id=\"" + cfg.id
+        + "\" type='radio'/>");
+    this.init();
+  }
+  Esgi.html.inputs.Radio.prototype = commons;
+
+  Esgi.html.inputs.Select = function(cfg) {
+    var me = this;
+    me.cfg = cfg;
+    me.el = $("<select class\"" + me.cfg.classInput + "\" name=\"" + cfg.name + "\" id=\"" + cfg.id + "\">");
+    for ( var val in cfg.options) {
+      $("<option />", {
+        value : val,
+        text : cfg.options[val]
+      }).appendTo(me.el);
+    }
+    me.init();
+
+  }
+  Esgi.html.inputs.Select.prototype = commons;
+  
   Esgi.html.inputs.File = function(cfg) {
     var me = this;
     me.cfg = cfg;
@@ -125,7 +149,23 @@ var global = this, loadMyLib = function(onloaded) {
     this.init();
   }
   Esgi.html.inputs.File.prototype = commons;
+  
 
+  Esgi.html.link = function(cfg) {
+    var me = this;
+    me.cfg = cfg;
+    me.el = $("<a href=\"" + cfg.href + "\" class=\"" + cfg.classe + "\"\">" + cfg.label + "</a>");
+    this.init();
+  }
+  
+  
+  
+  Esgi.html.link.prototype = {
+    init : function() {
+      var me = this;
+      $(me.cfg.renderTo).append(me.el);
+    }
+  };
 }
 
 $(loadMyLib);

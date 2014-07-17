@@ -36,7 +36,7 @@ public class CreationTopic extends AbstractAction{
 			
 			ORM_SEARCH searchSubject = new ORM_SEARCH();
 			searchSubject.addConstrainte("titre", sujet);
-			ArrayList<Sujet> resultSujet = (ArrayList<Sujet>) ORM.select(Sujet.class, searchSubject);
+			ArrayList<Sujet> resultSujet = (ArrayList<Sujet>) ORM.loadWithOutPrimaryKey(Sujet.class, searchSubject);
 			
 			if(resultSujet.size()>0){
 				System.out.println("sujet déjà existant.");
@@ -45,7 +45,7 @@ public class CreationTopic extends AbstractAction{
 				String login = (String) context.getRequest().getSession().getAttribute("username");
 				ORM_SEARCH search = new ORM_SEARCH();
 				search.addConstrainte("login", login);
-				ArrayList<User> results = (ArrayList<User>) ORM.select(User.class, search);
+				ArrayList<User> results = (ArrayList<User>) ORM.loadWithOutPrimaryKey(User.class, search);
 				User u = results.get(0);
 				
 				Date date = new Date();
@@ -55,7 +55,7 @@ public class CreationTopic extends AbstractAction{
 				Sujet s = new Sujet(sujet, u.getId(), date_to_string);			
 				ORM.save(s);		
 	
-				resultSujet = (ArrayList<Sujet>) ORM.select(Sujet.class, searchSubject);
+				resultSujet = (ArrayList<Sujet>) ORM.loadWithOutPrimaryKey(Sujet.class, searchSubject);
 				s = resultSujet.get(0);
 				Message m = new Message(message, date.toString(), u.getId(), s.getId());
 				ORM.save(m);

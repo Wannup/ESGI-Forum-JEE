@@ -13,14 +13,16 @@ Esgi.module.forum.CreationTopic = function (cfg) {
                   id : 'sujet',
                   type : "Text",
                   name : 'sujet',
-                  label : "Titre du sujet",
+                  label : "Titre ",
                   emptyText : 'Sujet' 
                     },{
                   id : 'message',
                   type : "TextArea",
                   name : 'message',
                   label : "Message",
-                  emptyText : 'Message' 
+                  emptyText : 'Message'
+                  
+                	  
                 }
              ]
         });

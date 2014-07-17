@@ -45,6 +45,10 @@ public class Message {
 			return message;
 		}
 		
+		public String getmessage(int id){
+			return message;
+		}
+		
 		public String getdate(){
 			return date;
 		}

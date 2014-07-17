@@ -35,7 +35,7 @@ public class Register extends AbstractAction{
 			if(password.equals(passwordCheck)){
 				ORM_SEARCH critere = new ORM_SEARCH();
 				critere.addConstrainte("login", login);
-				ArrayList<User> results = (ArrayList<User>) ORM.select(User.class, critere);			
+				ArrayList<User> results = (ArrayList<User>) ORM.loadWithOutPrimaryKey(User.class, critere);			
 				if(results.size() > 0){
 					System.out.println("Login déjà existant.");
 				}else{

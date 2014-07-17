@@ -1,4 +1,5 @@
 #set ($online = $context.getRequest().getSession().getAttribute("online"))
+
 <h2>
 	$context.setPageTitle("Esgi Forum")
 </h2>
@@ -18,7 +19,7 @@
 
 <center>____________________________________________________________________</center>
 	#foreach( $item in $items )
-		<a href="$item.getsujet()/">$item.getsujet()</a>  // $item.getdate()<br/>
+		<a href=$context.getProperties().get("context")/forum/topicmessagelist?id=$item.getId()>$item.getsujet()</a>  // $item.getdate()<br/>
 		<center>____________________________________________________________________</center>
 	#end
 

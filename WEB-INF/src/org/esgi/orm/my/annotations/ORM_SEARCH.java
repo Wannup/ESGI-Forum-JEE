@@ -25,6 +25,12 @@ public class ORM_SEARCH {
 		this.recherche = recherche;
 	}
 	
+	
+	/** Ajout une nouvelle contrainte 
+	 * 
+	 * @param column = nom du champ 
+	 * @param value = valeur de crit��re de selection
+	 */
 	public void addConstrainte(String column, String value){
 		this.recherche.put(column, value);
 	}
