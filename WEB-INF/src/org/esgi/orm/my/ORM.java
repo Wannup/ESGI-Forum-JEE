@@ -57,8 +57,8 @@ public class ORM implements IORM {
 		return "jdbc:mysql://" +mysqlHost + "/" + mysqlDatabase;
 	}
 	
-	public static Object loadWithOutPrimaryKey(Class c, ORM_SEARCH search) {
-		return instance._loadWithoutPrimaryKey(c, search);
+	public static Object select(Class c, ORM_SEARCH search) {
+		return instance._select(c, search);
 	}
 	
 	public static Object loadAllTable(Class c) {
@@ -526,38 +526,30 @@ public class ORM implements IORM {
 	}
 
 	@Override
-	public ArrayList<Object> _loadWithoutPrimaryKey(Class c, ORM_SEARCH search) {
+	public ArrayList<Object> _select(Class c, ORM_SEARCH searchColumn) {
 		ArrayList<Object> list =  new ArrayList<>();
 		Connection co = instance.createConnectionObject();
+		String champs = "";
+		String nameTab = getTableName(c);
+		ArrayList<Object[]> tabChamps = getAllField(c);
 		
 		try {			
-		
-			String nameTab = getTableName(c);
-
-			if(null == nameTab)
-				return null;
-
-
-			ArrayList<Object[]> tabChamps = getAllField(c);
-
-			String listechamps = "";
-			
 			
 			ArrayList<String> tabPK = new ArrayList<String>();
 
 			for(Object[] chps : tabChamps){
-				listechamps += chps[1] + ",";
+				champs += chps[1] + ",";
 				if(chps[2].toString().equals("PRIMARY_KEY"))
 					tabPK.add(chps[1].toString());
 			}
-			listechamps = listechamps.substring(0,listechamps.length()-1);
+			champs = champs.substring(0,champs.length()-1);
 				
-			String sql = "SELECT " + listechamps +" FROM "+ nameTab +" WHERE ";
+			String sql = "SELECT " + champs +" FROM "+ nameTab +" WHERE ";
 			int i=0;
 			
 			ArrayList<String> tempValue = new ArrayList<>();
 			
-			for(Entry<String, String> entry : search.getRecherche().entrySet()) {
+			for(Entry<String, String> entry : searchColumn.getRecherche().entrySet()) {
 			    String cle = entry.getKey();
 			    tempValue.add(entry.getValue());
 			    
@@ -569,34 +561,28 @@ public class ORM implements IORM {
 			    i++;
 			}
 						
-			PreparedStatement stat = (PreparedStatement) co.prepareStatement(sql) ;
-			
+			PreparedStatement stat = (PreparedStatement) co.prepareStatement(sql) ;		
 			
 			for(i = 0 ; i<tempValue.size() ; i++){
 				stat.setString(i+1, tempValue.get(i));
 			}
-
 			
 			ResultSet rs = (ResultSet) stat.executeQuery () ;
-
-			
-			Object tempO;
+		
+			Object temp;
 			Field[] fields = c.getFields();
 			while (rs.next ())
 			{
-				tempO = c.newInstance();
+				temp = c.newInstance();
 				for(Field f : fields){
 					if(f.getModifiers() == 1){
 						String nameField = namePackageToNamePropertie(f.getName());
-						f.set(tempO, rs.getObject(nameField));
+						f.set(temp, rs.getObject(nameField));
 					}
 				}
-				list.add(tempO);
+				list.add(temp);
 			}
-
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCause());
 			e.printStackTrace();
 		}
 

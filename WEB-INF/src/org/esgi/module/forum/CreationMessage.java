@@ -35,7 +35,7 @@ public class CreationMessage extends AbstractAction{
 				String login = (String) context.getRequest().getSession().getAttribute("username");
 				ORM_SEARCH search = new ORM_SEARCH();
 				search.addConstrainte("login", login);
-				ArrayList<User> results = (ArrayList<User>) ORM.loadWithOutPrimaryKey(User.class, search);
+				ArrayList<User> results = (ArrayList<User>) ORM.select(User.class, search);
 				User u = results.get(0);
 				
 				Date date = new Date();

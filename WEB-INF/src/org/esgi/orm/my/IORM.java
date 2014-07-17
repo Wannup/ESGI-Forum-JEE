@@ -15,7 +15,7 @@ public interface IORM {
 	/** delete an record from clazz persistence layer */
 	public boolean _remove(Class<?> c, Object id);
 	
-	public  ArrayList<Object> _loadWithoutPrimaryKey(Class clazz, ORM_SEARCH critere);
+	public  ArrayList<Object> _select(Class clazz, ORM_SEARCH searchColumn);
 
 	ArrayList<Object> _loadAllTable(Class c);
 	
