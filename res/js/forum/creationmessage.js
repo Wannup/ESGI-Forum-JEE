@@ -7,7 +7,7 @@ Esgi.module.forum.CreationMessage = function (cfg) {
         new Esgi.html.Form({
              url : APP_CONTEXT+'/forum/creationmessage',
              renderTo : cfg.id,
-             redirect : APP_CONTEXT + '/forum/topicmessagelist/',
+             redirect : APP_CONTEXT + '/index',
              inputs : [
                 {
                   id : 'message',
