@@ -6,6 +6,7 @@ import java.util.Date;
 import org.esgi.orm.my.ORM;
 import org.esgi.orm.my.annotations.ORM_SEARCH;
 import org.esgi.orm.my.model.Message;
+import org.esgi.orm.my.model.Sujet;
 import org.esgi.web.action.AbstractAction;
 import org.esgi.web.action.IContext;
 
@@ -24,23 +25,18 @@ public class TopicMessageList extends AbstractAction{
 	@Override
 	public void execute(IContext context) throws Exception {
 		context.getRequest().getSession(true);
-		context.getVelocityContext().put("title", "TopicMessageList");
-		String message = context.getRequest().getParameter("message");
-	
+		String idSujet = context.getRequest().getParameter("id");
 		
-		if(message!=null){		
-			String Message = (String) context.getRequest().getSession().getAttribute("Message");
-			ORM_SEARCH search = new ORM_SEARCH();
-			search.addConstrainte("Message", Message);
-			ArrayList<Message> results = (ArrayList<Message>) ORM.select(Message.class, search);
-			Message u = results.get(0);
-			
-			Date date = new Date();
-			
-			long sujetId = 3;
-			Message m = new Message(message, date.toString(), u.getId(), sujetId);
-			System.out.println(m);			
-					
-		}
-}
+		ORM_SEARCH searchSubject = new ORM_SEARCH();
+		searchSubject.addConstrainte("idS", idSujet);
+		ArrayList<Sujet> resultSujet = (ArrayList<Sujet>) ORM.select(Sujet.class, searchSubject);
+		
+		ORM_SEARCH searchMessage = new ORM_SEARCH();
+		searchMessage.addConstrainte("sujetId", idSujet);
+		ArrayList<Message> messageList = (ArrayList<Message>) ORM.select(Message.class, searchMessage);
+		
+		context.getVelocityContext().put("title", resultSujet.get(0).getsujet());
+		context.getVelocityContext().put("items", messageList);
+		
 	}
+}

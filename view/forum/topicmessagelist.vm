@@ -3,9 +3,10 @@
 <div id="container">
 </div>
 
-	#foreach( $item in $items )
-		<a href=$context.getProperties().get("context")/forum/topicmessagelist?id=$item.getId()>$item.getsujet()</a>  // $item.getdate()<br/>
-		<center>____________________________________________________________________</center>
-
+#foreach( $item in $items )
+	<center>____________________________________________________________________</center>
+	<center>$item.getmessage()</center>
 #end
-<center>$item.getMessage($item.getId())</center>
+<center>____________________________________________________________________</center>
+
+<center><b><a href=$context.getProperties().get("context")/forum/creationmessage?id=$context.getRequest().getParameter("id")> Nouveau message </a><b></center>

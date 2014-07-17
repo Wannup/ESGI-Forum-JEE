@@ -24,7 +24,7 @@
 		 
 		 	#else
 		 	<div align="right">
-		 		<i>Bienvenue <b>$context.getRequest().getSession().getAttribute("username")</b></i>
+		 		<i>Bienvenue <b>$context.getRequest().getSession().getAttribute("username")</b><br/> <a href=$context.getProperties().get("context")/user/deconnect>  D&eacute;connexion</a></i>
 		 
 		 #end  
 
@@ -33,13 +33,12 @@
 <div>
 	<ul><h4>	 
 		 |<a href=$context.getProperties().get("context")/index/>  Accueil  </a>|
-		 <a href=$context.getProperties().get("context")/infos/info> Qui sommes nous  </a>|
 		
 		 #if($online)
 		 	<a href=$context.getProperties().get("context")/forum/creationtopic> Nouveau sujet  </a>|
 		 	<a href=$context.getProperties().get("context")/user/userpage> Mon compte  </a>|
-		 	<a href=$context.getProperties().get("context")/user/deconnect/>  Se d&eacute;connecter  </a>|
 		 #end
+		 <a href=$context.getProperties().get("context")/infos/info> Qui sommes nous  </a>|
 	</ul></h4>
 </div>
 </center>

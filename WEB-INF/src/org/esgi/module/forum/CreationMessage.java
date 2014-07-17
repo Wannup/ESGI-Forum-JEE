@@ -27,10 +27,10 @@ public class CreationMessage extends AbstractAction{
 		@Override
 		public void execute(IContext context) throws Exception {
 			context.getRequest().getSession(true);
-			context.getVelocityContext().put("title", "CreationMessage");
+			context.getVelocityContext().put("title", "Nouveau message");
 			String message = context.getRequest().getParameter("message");
-		
-			
+			String sujetId = context.getRequest().getParameter("id");
+			context.setParameter("idSujet", sujetId);
 			if(message!=null){		
 				String login = (String) context.getRequest().getSession().getAttribute("username");
 				ORM_SEARCH search = new ORM_SEARCH();
@@ -39,10 +39,9 @@ public class CreationMessage extends AbstractAction{
 				User u = results.get(0);
 				
 				Date date = new Date();
-				
-				long sujetId = 0;
-				Message m = new Message(message, date.toString(), u.getId(), sujetId);
-				Message mTmp = (Message) ORM.save(m);			
+				System.out.println((String) context.getParameter("idSujet"));
+				//Message m = new Message(message, date.toString(), u.getId(), Long.parseLong(sujetId));
+				//ORM.save(m);			
 						
 			}
 		}

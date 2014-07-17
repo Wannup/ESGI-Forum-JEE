@@ -10,14 +10,8 @@ Esgi.module.forum.CreationMessage = function (cfg) {
              redirect : APP_CONTEXT + '/forum/topicmessagelist/',
              inputs : [
                 {
-                      id : 'sujet',
-                      type : "Text",
-                      name : 'sujet',
-                      label : "Titre du sujet",
-                      emptyText : 'Sujet' 
-                    },{
                   id : 'message',
-                  type : "Text",
+                  type : "TextArea",
                   name : 'message',
                   label : "Message",
                   emptyText : 'Message' 
