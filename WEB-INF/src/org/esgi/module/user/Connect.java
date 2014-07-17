@@ -31,7 +31,7 @@ public class Connect extends AbstractAction{
 		search.addConstrainte("login", login);
 		
 		HttpSession session = context.getRequest().getSession(true);
-		ArrayList<User> results = (ArrayList<User>) ORM.loadWithOutPrimaryKey(User.class, search);
+		ArrayList<User> results = (ArrayList<User>) ORM.select(User.class, search);
 		String error = " ";
 		if(login != null && password != null){
 			boolean connectOk = false;

@@ -6,7 +6,6 @@ import java.util.Date;
 import org.esgi.orm.my.ORM;
 import org.esgi.orm.my.annotations.ORM_SEARCH;
 import org.esgi.orm.my.model.Message;
-import org.esgi.orm.my.model.User;
 import org.esgi.web.action.AbstractAction;
 import org.esgi.web.action.IContext;
 
@@ -33,7 +32,7 @@ public class TopicMessageList extends AbstractAction{
 			String Message = (String) context.getRequest().getSession().getAttribute("Message");
 			ORM_SEARCH search = new ORM_SEARCH();
 			search.addConstrainte("Message", Message);
-			ArrayList<Message> results = (ArrayList<Message>) ORM.loadWithOutPrimaryKey(Message.class, search);
+			ArrayList<Message> results = (ArrayList<Message>) ORM.select(Message.class, search);
 			Message u = results.get(0);
 			
 			Date date = new Date();
